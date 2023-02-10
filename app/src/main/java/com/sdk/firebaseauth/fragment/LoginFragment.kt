@@ -30,7 +30,13 @@ class LoginFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
+        if (auth.currentUser != null) {
+            findNavController().navigate(R.id.action_loginFragment_to_homeFragment)
+            binding.btnLogin.isVisible = true
+        } else {
+            binding.pr.isVisible = false
+            binding.btnLogin.isVisible = true
+        }
         binding.btnLogin.setOnClickListener {
             binding.pr.isVisible = true
             binding.btnLogin.isEnabled = false
@@ -47,6 +53,9 @@ class LoginFragment : Fragment() {
                         toast(it.exception?.message.toString())
                     }
                 }
+        }
+        binding.textReg.setOnClickListener {
+            findNavController().navigate(R.id.action_loginFragment_to_registerFragment)
         }
     }
 
